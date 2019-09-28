@@ -1,0 +1,10 @@
+ {BMPR}←BMPR Update bmp;⎕IO;⎕ML;canvas;size;fills;canins
+ ⍝ Update an existing HMTLRenderer with new content. 
+ ⍝ Scaling/size assumed to be unchanged.
+
+ (⎕IO ⎕ML)←0 1
+ (size canvas canins)←BMPR.Data
+ fills←1⊃canins
+ canvas[fills]←⊂GenFills size bmp
+
+ BMPR.HTML←∊canvas

@@ -1,0 +1,8 @@
+ r←GenFills(size bmp);step;tl;fmt
+⍝ Generate JavaScript calls to fill our canvas with rectangles
+
+ step←size÷⍴bmp
+ tl←⌊step(×⍤1)↑⍸bmp
+
+ fmt←'<ctx.fillRect(>,I3,<,>,I3,','<',(∊',',¨⍕¨⌊step),')>'
+ r←⊂,(⎕UCS 10),fmt ⎕FMT tl
