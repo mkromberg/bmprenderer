@@ -1,0 +1,5 @@
+ Random(pct ANIMATE);DELAY
+⍝ Random, with pct cells turned on
+
+ DELAY←1÷10*~ANIMATE
+ Run(?30 30⍴100)>pct

@@ -1,0 +1,4 @@
+ Gliders ANIMATE;DELAY
+
+ DELAY←1÷10*~ANIMATE
+ Run{((⍵×0),⍵)⍪⍵,⍵}15 15↑¯10 ¯10↑glider

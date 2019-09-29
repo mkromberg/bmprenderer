@@ -1,0 +1,36 @@
+ Run board;BMPR;new;born;died;remain;white;black;red;blue;⎕IO;⎕ML;step;out;in
+ (⎕IO ⎕ML)←0 1
+
+ :If 0=⎕NC'DELAY' ⋄ DELAY←0.1 ⋄ :EndIf
+ :If 0=⎕NC'ANIMATE' ⋄ ANIMATE←1 ⋄ :EndIf
+
+ BMPR←600 600 ##.##.Init~board
+
+ :Trap 0
+
+     :Repeat
+         new←next board
+
+         :If ANIMATE
+             born←new>board
+             died←board>new
+             remain←new∧new=board
+             white←255 255 255
+             black←0 0 0
+
+             :For step :In ⍳16
+                 in←16×step ⋄ out←255-8×step
+                 blue←⌊out÷2 2 1  ⍝ Fade to black
+                 red←255 in in ⍝ Fade to white
+                 BMPR ##.##.Update(white black red blue)[remain+(2×died)+(3×born)]
+                 ⎕DL DELAY÷16
+             :EndFor
+
+         :EndIf
+
+         BMPR ##.##.Update~board←new
+         ⎕DL DELAY
+
+     :EndRepeat
+
+ :EndTrap
