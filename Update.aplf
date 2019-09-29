@@ -1,5 +1,5 @@
  {BMPR}←BMPR Update bmp;⎕IO;⎕ML;canvas;size;fills;canins
- ⍝ Update an existing HMTLRenderer with new content. 
+ ⍝ Update an existing HMTLRenderer with new content.
  ⍝ Scaling/size assumed to be unchanged.
 
  (⎕IO ⎕ML)←0 1

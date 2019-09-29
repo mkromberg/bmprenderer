@@ -1,8 +1,32 @@
- r←GenFills(size bmp);step;tl;fmt
+ r←GenFills(size bmp);⎕IO;step;tl;fmt;rgb;ix;cells;most;ncells;digits;styles;m;fill;t;rgbix
 ⍝ Generate JavaScript calls to fill our canvas with rectangles
 
- step←size÷⍴bmp
- tl←⌊step(×⍤1)↑⍸bmp
+ ⎕IO←0
 
- fmt←'<ctx.fillRect(>,I3,<,>,I3,','<',(∊',',¨⍕¨⌊step),')>'
- r←⊂,(⎕UCS 10),fmt ⎕FMT tl
+ :If 11=⎕DR bmp ⍝ Boolean
+     rgb←↑3/¨(1=⊃bmp)⌽0 255 ⍝ 0=black and 1=white
+     cells←{⊂⍵}⌸,bmp
+ :Else
+     ix←⍳⍨rgb←↑,bmp
+     (rgbix cells)←↓[0]ix{⍺ ⍵}⌸⍳≢rgb
+     rgb←rgb[rgbix;]
+ :EndIf
+
+ digits←'0123456789ABCDEF'
+ ix←(,⍤2)16 16(⊤⍤1 0)rgb
+ styles←'ctx.fillStyle = "#'(,⍤1)digits[ix](,⍤1)'";'
+
+ ncells←≢¨cells
+ most←ncells⍳⌈/ncells ⍝ Most popular colour
+
+ r←(most⌷styles),' ctx.fillRect(0,0',(',',¨⍕¨size),');' ⍝ Colour background
+
+ m←most≠⍳⍴cells ⍝ all the other colours
+
+ step←size÷⍴bmp
+ tl←⌊step(×⍤1)⍉(⍴bmp)⊤∊m/cells
+
+ fmt←'<ctx.fillRect(>,I3,<,>,I3,','<',(∊',',¨⍕¨⌊step),');>'
+ fill←fmt ⎕FMT tl
+
+ r,←∊(↓m⌿styles),¨,¨(∊(m/ncells)↑¨1)⊂[0]fill
