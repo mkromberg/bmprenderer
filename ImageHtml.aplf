@@ -7,7 +7,7 @@
      bmp←256⊥¨bmp
  :EndSelect
 
- :If 2≤repl←8⌊⌈256÷⌈/size
+ :If 2≤repl←8⌊⌈256÷⌈/⍴bmp
      bmp←repl⌿repl/bmp
  :EndIf
 

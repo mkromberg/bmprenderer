@@ -2,7 +2,7 @@
  (⎕IO ⎕ML)←0 1
 
  :If 0=⎕NC'DELAY' ⋄ DELAY←0.1 ⋄ :EndIf
- :If 0=⎕NC'ANIMATE' ⋄ ANIMATE←1 ⋄ :EndIf
+ :If 0=⎕NC'FADE' ⋄ FADE←1 ⋄ :EndIf
 
  BMPR←600 600 ##.##.Init~board
 
@@ -11,7 +11,7 @@
      :Repeat
          new←next board
 
-         :If ANIMATE
+         :If FADE ⍝ "fade" from one state to the next
              born←new>board
              died←board>new
              remain←new∧new=board
