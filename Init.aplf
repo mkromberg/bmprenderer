@@ -1,17 +1,11 @@
- BMPR←{size}Init bmp;⎕IO;⎕ML;scale;canins;canvas;atts;fills;style
+ BMPR←{size}Init bmp;⎕IO;⎕ML;scale;canins;canvas;atts;fills;style;w;h;img;html;add
 ⍝ Return a new HTMLRenderer containing bmp, with optional size
 
- (⎕IO ⎕ML)←0 1 ⍝ Doing offsetting and first'ing in here
-
  :If 0=⎕NC'size' ⋄ size←600 600 ⋄ :EndIf ⍝ Not sure exactly what units these are
- scale←1.654 1.734 ⍝ Need to create an HTMLRenderer this much bigger than Size
+ html←size ImageHtml bmp
 
- canins←⍸'@'=canvas←1↓∊(⎕UCS 10),¨CanvasHTML
- (style fills atts)←canins ⍝ Canvas Insertion Points
+ scale←1.3 ⍝ Need to create an HTMLRenderer this much bigger than Size
+ add←40 5  ⍝ For Chrome
 
- canvas[style]←⊂'width: ',(w←⍕0⊃size),'px; height: ',(h←⍕1⊃size),'px; margin: 0px auto;'
- canvas[atts]←⊂'width="',w,'" height="',h,'" '
- canvas[fills]←⊂GenFills size bmp
-
- 'BMPR'⎕WC'HTMLRenderer'('HTML'(∊canvas))('Size'(size×scale))('Coord' 'Pixel')
- BMPR.Data←(size canvas canins)
+ 'BMPR'⎕WC'HTMLRenderer'('HTML'html)('Size'(add+scale×size))('Coord' 'Pixel')
+ BMPR.(Data←⎕NS'').size←size

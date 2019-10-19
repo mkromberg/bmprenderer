@@ -1,0 +1,16 @@
+ html←size ImageHtml bmp;h;w;img;repl
+
+ :Select ⎕DR bmp
+ :Case 11 ⍝ Boolean, 0=black, 1=white
+     bmp←bmp×(256⊥255 255 255)
+ :Case 326 ⍝ enclosed rgb
+     bmp←256⊥¨bmp
+ :EndSelect
+
+ :If 2≤repl←8⌊⌈256÷⌈/size
+     bmp←repl⌿repl/bmp
+ :EndIf
+
+ (w h)←size
+ img←'<img width="',(⍕w),'" height="',(⍕h),'" src="',(Png.Uri bmp),'">'
+ html←'<html><body>',img,'</body></html>'
