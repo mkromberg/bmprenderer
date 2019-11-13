@@ -1,8 +1,10 @@
  html←size ImageHtml bmp;h;w;img;repl
 
  :Select ⎕DR bmp
- :Case 11 ⍝ Boolean, 0=black, 1=white
+ :Case 11  ⍝ Boolean, 0=black, 1=white
      bmp←bmp×(256⊥255 255 255)
+ :CaseList 645 1287 ⍝ Floating
+     bmp←{((256*2)×⍵)+(256×⍵)+⍵}⌊0.5+255×bmp
  :Case 326 ⍝ enclosed rgb
      bmp←256⊥¨bmp
  :EndSelect
