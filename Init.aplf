@@ -5,7 +5,7 @@
  html←size ImageHtml bmp
 
  scale←1.3 ⍝ Need to create an HTMLRenderer this much bigger than Size
- add←40 5  ⍝ For Chrome
+ add←220 220  ⍝ For Chrome
 
  'BMPR'⎕WC'HTMLRenderer'('HTML'html)('Size'(add+scale×size))('Coord' 'Pixel')
  BMPR.(Data←⎕NS'').size←size
