@@ -1,7 +1,9 @@
  BlueGreen;bg;BMPR;i
  bg←¯1+⍳256 256
  BMPR←600 600 ##.##.Init 256⊥¨bg
- :For i :In ⍳256
-     bg←256|1+bg
-     BMPR ##.##.Update 256⊥¨bg
- :EndFor
+ :Trap 6 ⍝ Value error on close
+     :For i :In ⍳256
+         bg←256|1+bg
+         BMPR ##.##.Update 256⊥¨bg
+     :EndFor
+ :EndTrap
