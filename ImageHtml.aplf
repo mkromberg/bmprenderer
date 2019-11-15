@@ -14,5 +14,5 @@
  :EndIf
 
  (w h)←size
- img←'<img width="',(⍕w),'" height="',(⍕h),'" src="',(Png.Uri bmp),'">'
+ img←'<img width="',(⍕w),'" height="',(⍕h),'" src="',(Png.Uri⊖bmp),'">'
  html←'<html><body>',img,'</body></html>'
