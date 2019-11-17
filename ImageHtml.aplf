@@ -13,6 +13,7 @@
      bmp←repl⌿repl/bmp
  :EndIf
 
+ bmp←0⌈bmp⌊256⊥255 255 255 ⍝ cap ranges
  (h w)←size
  img←'<img width="',(⍕w),'" height="',(⍕h),'" src="',(Png.Uri⊖bmp),'">'
  html←'<html><body>',img,'</body></html>'
